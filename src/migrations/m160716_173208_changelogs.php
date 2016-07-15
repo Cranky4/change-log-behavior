@@ -16,9 +16,9 @@
                 'id'       => $this->primaryKey(),
                 'level'    => $this->integer(11)->null(),
                 'category' => $this->string(255)->null(),
-                'log_time' => $this->integer(11),
-                'prefix'   => $this->text(),
-                'message'  => $this->text(),
+                'log_time' => $this->integer(11)->null(),
+                'prefix'   => $this->text()->null(),
+                'message'  => $this->text()->null(),
             ], $tableOptions);
 
             $this->createIndex('idx_log_level', '{{%changelogs}}', ['level']);
