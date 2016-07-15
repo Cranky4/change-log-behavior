@@ -36,9 +36,6 @@
                 throw new Exception("Attach ".ChangeLogBehavior::className()." behavior to ".$model::className());
             }
 
-            if (!method_exists($model, 'getLog')) {
-                throw new InvalidConfigException("Method {getLog} not found in {$model::className()}. Attach {LogChangesBehavior} to model.");
-            }
             $logProvider = $model->getLog();
 
             $view = "<h2>".Inflector::camel2words($model->formName())." change log:</h2>";

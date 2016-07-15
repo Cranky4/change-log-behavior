@@ -9,14 +9,11 @@
     namespace cranky4\ChangeLogBehavior;
 
     use yii\base\Component;
-    use yii\base\InvalidConfigException;
     use yii\data\ArrayDataProvider;
     use yii\db\ActiveRecord;
     use yii\db\Query;
 
     /**
-     * TODO: поправить категории
-     *
      * Class ChangeLog
      * @package cranky4\ChangeLogBehavior
      */
@@ -26,6 +23,7 @@
          * @var string
          */
         public $prefix = 'changelog';
+        public $showLimit = 20;
 
         /**
          * @param \yii\db\ActiveRecord $model
@@ -35,9 +33,6 @@
         protected function getCategory(ActiveRecord $model)
         {
             if (!$model->isNewRecord) {
-                if (!isset($model->id)) {
-                    throw new InvalidConfigException("Id must be set in {$model::className()}");
-                }
                 $id = $model->id;
                 $category = $this->prefix.'.'.$model->formName().'_'.$id;
             } else {
@@ -53,6 +48,7 @@
          */
         public function addLog(ActiveRecord $model, $message)
         {
+            $this->initLogger();
             \Yii::info($message, $this->getCategory($model));
         }
 
@@ -68,12 +64,16 @@
                     ->where(['category' => $this->getCategory($model)])
                     ->from('{{%changelogs}}')
                     ->orderBy(['log_time' => SORT_ASC])
-                    ->limit(100)
+                    ->limit($this->showLimit)
                     ->all(),
                 'pagination' => false,
             ]);
 
             return $provider;
+        }
+
+        private function initLogger()
+        {
         }
 
     }
