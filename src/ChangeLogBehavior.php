@@ -60,6 +60,7 @@
              * @var ActiveRecord $owner
              */
             $owner = $this->owner;
+
             return \Yii::$app->logChanges->getLog($owner);
         }
     }

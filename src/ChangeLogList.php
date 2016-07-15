@@ -9,7 +9,6 @@
     namespace cranky4\ChangeLogBehavior;
 
     use yii\base\Exception;
-    use yii\base\InvalidConfigException;
     use yii\base\Model;
     use yii\base\Widget;
     use yii\grid\GridView;

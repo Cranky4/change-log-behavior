@@ -48,7 +48,6 @@
          */
         public function addLog(ActiveRecord $model, $message)
         {
-            $this->initLogger();
             \Yii::info($message, $this->getCategory($model));
         }
 
@@ -71,9 +70,4 @@
 
             return $provider;
         }
-
-        private function initLogger()
-        {
-        }
-
     }
