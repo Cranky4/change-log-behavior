@@ -2,7 +2,7 @@
 
     use yii\db\Migration;
 
-    class m160715_173208_changelogs extends Migration
+    class m160716_173208_changelogs extends Migration
     {
         // Use safeUp/safeDown to run migration code within a transaction
         public function safeUp()
