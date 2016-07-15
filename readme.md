@@ -16,7 +16,7 @@ composer require cranky4/ChangeLogBehavior "*"
 ```
 3. Run migrations:
 ```
-yii migrate --migrationPath=@vendor/cranky4/migrations
+yii migrate --migrationPath=@vendor/cranky4/change-log-behavior/src/migrations
 ```
 
 ## Usage
