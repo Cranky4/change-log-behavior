@@ -1,0 +1,26 @@
+{
+  "name": "cranky4/ChangeLogBehavior",
+  "description": "Simple changelog behavior for yii2 models",
+  "license": "MIT",
+  "keywords": [
+    "yii2",
+    "changelog"
+  ],
+  "authors": [
+    {
+      "name": "Alexander Shander",
+      "email": "cranky4.89@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "cranky4\\ChangeLogBehavior\\": "src"
+    }
+  }
+}
