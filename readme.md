@@ -44,9 +44,10 @@ its changes.
         ...
         'log'         => [
             'targets'    => [
+                // add new target
                 [
                     'class'      => 'yii\log\DbTarget',
-                    'categories' => ['cranky4\changelogBehavior\ChangeLog:*'],
+                    'categories' => ['cranky4\ChangeLogBehavior\ChangeLog:*'],
                     'logTable'   => '{{%changelogs}}',
                     //remove application category from logging
                     'logVars'    => [],
@@ -57,6 +58,7 @@ its changes.
         ...
     ],
 ```
+You can add other targets are to catch logs changes, but *categories*, *logTable* and *level* must be same as in the code above.
 
 3- Add *ChangeLogList* to view:
 ```php
@@ -67,7 +69,10 @@ its changes.
 
 4- Add custom log:
 ```php
-\Yii::$app->c4ChangeLog->addLog($model, serialize($diff));
+// Use serialize() if you want to add array. Use pairs [attrName => message, attrName2 => message]:
+\Yii::$app->c4ChangeLog->addLog($model, serialize($array));
+// If you want to add text to log use: 
+\Yii::$app->c4ChangeLog->addLog($model, $someText);
 ```
 
 ### Example
@@ -79,16 +84,13 @@ return [
     'components' => [
         ...
         'log'         => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets'    => [
-                [
-                    'class'      => 'yii\log\DbTarget',
-                    'categories' => ['changelog.*'],
-                    'logTable'   => '{{%changelogs}}',
-                    //remove application category from logging
-                    'logVars'    => [],
-                    'levels'     => ['info'],
-                ],
+            [
+                'class'      => 'yii\log\DbTarget',
+                'categories' => ['cranky4\ChangeLogBehavior\ChangeLog:*'],
+                'logTable'   => '{{%changelogs}}',
+                //remove application category from logging
+                'logVars'    => [],
+                'levels'     => ['info'],
             ],
         ],
         'c4ChangeLog' => [
