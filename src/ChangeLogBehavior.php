@@ -38,9 +38,9 @@
 
             $diff = [];
             foreach ($changedAttributes as $attrName => $attrVal) {
-                $oldAttrVal = $owner->getAttribute($attrName);
-                if ($oldAttrVal != $attrVal) {
-                    $diff[$attrName] = $attrVal." => ".$oldAttrVal;
+                $newAttrVal = $owner->getAttribute($attrName);
+                if ($newAttrVal != $attrVal) {
+                    $diff[$attrName] = $attrVal." => ".$newAttrVal;
                 }
             }
             if ($diff) {
