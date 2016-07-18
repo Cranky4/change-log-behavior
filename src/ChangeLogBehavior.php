@@ -40,13 +40,18 @@
             foreach ($changedAttributes as $attrName => $attrVal) {
                 $newAttrVal = $owner->getAttribute($attrName);
                 if ($newAttrVal != $attrVal) {
-                    $diff[$attrName] = $attrVal." => ".$newAttrVal;
+                    if ($attrVal == '') {
+                        $attrVal = 'null';
+                    }
+                    if ($newAttrVal == '') {
+                        $newAttrVal = 'null';
+                    }
+                    $diff[$attrName] = $attrVal." &raquo; ".$newAttrVal;
                 }
             }
             if ($diff) {
-                foreach ($this->excludedAttributes as $attr) {
-                    unset($diff[$attr]);
-                }
+                $diff = $this->_setLabels($this->_applyExclude($diff));
+
                 \Yii::$app->c4ChangeLog->addLog($owner, serialize($diff));
             }
         }
@@ -62,5 +67,39 @@
             $owner = $this->owner;
 
             return \Yii::$app->c4ChangeLog->getLog($owner);
+        }
+
+        /**
+         * @param array $diff
+         *
+         * @return array
+         */
+        private function _applyExclude(array $diff)
+        {
+            foreach ($this->excludedAttributes as $attr) {
+                unset($diff[$attr]);
+            }
+
+            return $diff;
+        }
+
+        /**
+         * @param array $diff
+         *
+         * @return array
+         */
+        private function _setLabels(array $diff)
+        {
+            /**
+             * @var ActiveRecord $owner
+             */
+            $owner = $this->owner;
+
+            foreach ($diff as $attr => $msg) {
+                unset($diff[$attr]);
+                $diff[$owner->getAttributeLabel($attr)] = $msg;
+            }
+
+            return $diff;
         }
     }

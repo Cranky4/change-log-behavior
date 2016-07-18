@@ -35,7 +35,8 @@ public function behaviors()
     ];
 }
 ```
-Add attributes to *excludedAttributes* if you don't want to log 
+__Attention:__ Behavior watches to "safe" attributes only.
+Add attributes into *excludedAttributes* if you don't want to log 
 its changes.
 
 2- Configure *log* component:
