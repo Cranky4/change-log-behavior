@@ -4,24 +4,24 @@ Simple behavior for your yii2-models
 
 ## Installation
 
-1. Install package via composer:
+1- Install package via composer:
 ```
 composer require cranky4/ChangeLogBehavior "*"
 ```
-1. Add ChangeLog component to your project config file:
+2- Add ChangeLog component to your project config file:
 ```php
 'changeLog' => [
     'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
 ],
 ```
-1. Run migrations:
+3- Run migrations:
 ```
 yii migrate --migrationPath=@vendor/cranky4/change-log-behavior/src/migrations
 ```
 
 ## Usage
 
-2. Add *ChangeLogBehavior* to any model or active record:
+1- Add *ChangeLogBehavior* to any model or active record:
 ```php
 public function behaviors()
 {
@@ -38,7 +38,7 @@ public function behaviors()
 Add attributes to *excludedAttributes* if you don't want to log 
 its changes.
 
-2. Configure *log* component:
+2- Configure *log* component:
 ```php
     'components' => [
         ...
@@ -59,14 +59,14 @@ its changes.
     ],
 ```
 
-2. Add *ChangeLogList* to view:
+3- Add *ChangeLogList* to view:
 ```php
  echo ChangeLogList::widget([
      'model' => $model,
  ])
 ```
 
-2. Add custom log:
+4- Add custom log:
 ```php
 \Yii::$app->logChanges->addLog($model, serialize($diff));
 ```
