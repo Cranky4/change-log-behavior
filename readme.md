@@ -10,7 +10,7 @@ composer require cranky4/ChangeLogBehavior "*"
 ```
 2- Add ChangeLog component to your project config file:
 ```php
-'changeLog' => [
+'c4ChangeLog' => [
     'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
 ],
 ```
@@ -43,7 +43,6 @@ its changes.
     'components' => [
         ...
         'log'         => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
                     'class'      => 'yii\log\DbTarget',
@@ -68,7 +67,7 @@ its changes.
 
 4- Add custom log:
 ```php
-\Yii::$app->logChanges->addLog($model, serialize($diff));
+\Yii::$app->c4ChangeLog->addLog($model, serialize($diff));
 ```
 
 ### Example
@@ -92,8 +91,8 @@ return [
                 ],
             ],
         ],
-        'logChanges' => [
-            'class' => \common\components\logChanges\LogChanges::className(),
+        'c4ChangeLog' => [
+            'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
         ],
         ...
     ],

@@ -56,7 +56,7 @@
                                 return $message;
                             }
 
-                            return null;
+                            return $messages;
                         },
                     ],
                 ],
