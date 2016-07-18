@@ -47,7 +47,7 @@
                 foreach ($this->excludedAttributes as $attr) {
                     unset($diff[$attr]);
                 }
-                \Yii::$app->logChanges->addLog($owner, serialize($diff));
+                \Yii::$app->c4ChangeLog->addLog($owner, serialize($diff));
             }
         }
 
@@ -61,6 +61,6 @@
              */
             $owner = $this->owner;
 
-            return \Yii::$app->logChanges->getLog($owner);
+            return \Yii::$app->c4ChangeLog->getLog($owner);
         }
     }
