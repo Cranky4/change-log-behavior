@@ -47,7 +47,7 @@ its changes.
             'targets'    => [
                 [
                     'class'      => 'yii\log\DbTarget',
-                    'categories' => ['changelog.*'],
+                    'categories' => ['cranky4\changelogBehavior\ChangeLog:*'],
                     'logTable'   => '{{%changelogs}}',
                     //remove application category from logging
                     'logVars'    => [],

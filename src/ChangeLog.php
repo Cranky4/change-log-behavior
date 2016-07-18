@@ -9,6 +9,7 @@
     namespace cranky4\ChangeLogBehavior;
 
     use yii\base\Component;
+    use yii\base\Model;
     use yii\data\ArrayDataProvider;
     use yii\db\ActiveRecord;
     use yii\db\Query;
@@ -22,21 +23,20 @@
         /**
          * @var string
          */
-        public $prefix = 'changelog';
         public $showLimit = 20;
 
         /**
-         * @param \yii\db\ActiveRecord $model
+         * @param \yii\base\Model $model
          *
          * @return string
          */
-        protected function getCategory(ActiveRecord $model)
+        protected function getCategory(Model $model)
         {
             if (!$model->isNewRecord) {
                 $id = $model->id;
-                $category = $this->prefix.'.'.$model->formName().'_'.$id;
+                $category = self::className().':'.$model->formName().'-'.$id;
             } else {
-                $category = $this->prefix.'.'.$model->formName();
+                $category = self::className().':'.$model->formName();
             }
 
             return $category;
