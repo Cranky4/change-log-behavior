@@ -58,7 +58,7 @@
          */
         public function getLog(ActiveRecord $model)
         {
-            $provider = new ArrayDataProvider([
+            return new ArrayDataProvider([
                 'allModels'  => (new Query())->select('log_time, prefix, message')
                     ->where(['category' => $this->getCategory($model)])
                     ->from('{{%changelogs}}')
@@ -67,7 +67,5 @@
                     ->all(),
                 'pagination' => false,
             ]);
-
-            return $provider;
         }
     }

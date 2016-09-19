@@ -21,10 +21,29 @@
     class ChangeLogList extends Widget
     {
         /**
-         * @var Model $model
+         * @var Model
          */
         public $model;
+        /**
+         * @var string
+         */
+        public $header;
 
+        /**
+         * @inheritdoc
+         */
+        public function init() {
+            parent::init();
+            if(!$this->header) {
+                $this->header = "<h2>".Inflector::camel2words($this->model->formName())." change log:</h2>";
+            }
+        }
+
+        /**
+         * @inheritdoc
+         * @return bool|string
+         * @throws Exception
+         */
         public function run()
         {
             $model = $this->model;
@@ -35,9 +54,12 @@
                 throw new Exception("Attach ".ChangeLogBehavior::className()." behavior to ".$model::className());
             }
 
+            /**
+             * @var ChangeLogBehavior $model
+             */
             $logProvider = $model->getLog();
 
-            $view = "<h2>".Inflector::camel2words($model->formName())." change log:</h2>";
+            $view = $this->header;
             $view .= GridView::widget([
                 'dataProvider' => $logProvider,
                 'columns'      => [
