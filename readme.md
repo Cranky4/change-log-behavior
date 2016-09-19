@@ -1,6 +1,6 @@
-# Changelog Behavior
+# Changelog Behavior (v.0.0.3)
 
-Simple behavior for your yii2-models (v.0.0.2)
+Simple behavior for your yii2-models 
 
 ## Installation
 
