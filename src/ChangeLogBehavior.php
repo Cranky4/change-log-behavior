@@ -49,8 +49,10 @@
                     $diff[$attrName] = $attrVal." &raquo; ".$newAttrVal;
                 }
             }
+            $diff = $this->_applyExclude($diff);
+
             if ($diff) {
-                $diff = $this->_setLabels($this->_applyExclude($diff));
+                $diff = $this->_setLabels($diff);
 
                 \Yii::$app->c4ChangeLog->addLog($owner, serialize($diff));
             }
