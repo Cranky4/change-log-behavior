@@ -1,4 +1,4 @@
-# Changelog Behavior (v.0.0.3)
+# Changelog Behavior (v.0.0.4)
 
 Simple behavior for your yii2-models 
 
@@ -6,7 +6,7 @@ Simple behavior for your yii2-models
 
 1- Install package via composer:
 ```
-composer require cranky4/ChangeLogBehavior "*"
+composer require cranky4/change-log-behavior "*"
 ```
 2- Add ChangeLog component to your project config file:
 ```php
