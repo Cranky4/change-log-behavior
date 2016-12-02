@@ -55,12 +55,10 @@
             }
             $diff = $this->_applyExclude($diff);
 
-            $function = $component->getSerializeFunction();
-
             if ($diff) {
                 $diff = $this->_setLabels($diff);
 
-                $component->addLog($owner, $function($diff));
+                $component->addLog($owner, $component->serialize($diff));
             }
         }
 

@@ -32,9 +32,10 @@
         /**
          * @inheritdoc
          */
-        public function init() {
+        public function init()
+        {
             parent::init();
-            if(!$this->header) {
+            if (!$this->header) {
                 $this->header = "<h2>".Inflector::camel2words($this->model->formName())." change log:</h2>";
             }
         }
@@ -62,7 +63,6 @@
              * @var ChangeLog $component
              */
             $component = \Yii::$app->c4ChangeLog;
-            $function = $component->getUnSerializeFunction();
 
             $view = $this->header;
             $view .= GridView::widget([
@@ -72,8 +72,8 @@
                     'prefix',
                     [
                         'attribute' => 'message',
-                        'content'   => function ($item) use ($function) {
-                            $messages = $function($item['message']);
+                        'content'   => function ($item) use ($component) {
+                            $messages = $component->unserialize($item['message']);
                             if (is_array($messages)) {
                                 $message = "";
                                 foreach ($messages as $attr => $changes) {

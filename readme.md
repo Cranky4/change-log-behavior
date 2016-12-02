@@ -80,7 +80,7 @@ You can add other targets are to catch logs changes, but *categories*, *logTable
 ```php
     'c4ChangeLog' => [
         'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
-        'serializer' => 'json_encode'
+        'serializer' => 'json'
     ],
 ```
 

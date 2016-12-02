@@ -13,6 +13,8 @@
     use yii\data\ArrayDataProvider;
     use yii\db\ActiveRecord;
     use yii\db\Query;
+    use yii\helpers\ArrayHelper;
+    use yii\helpers\Json;
 
     /**
      * Class ChangeLog
@@ -77,24 +79,28 @@
         /**
          * @return string
          */
-        public function getSerializeFunction()
+        public function serialize($data)
         {
-            if (in_array($this->serializer, ['serialize', 'json_encode'])) {
-                return $this->serializer;
+            if ($this->serializer == 'json') {
+                return Json::encode($data);
             }
 
-            return 'serialize';
+            return serialize($data);
         }
 
         /**
          * @return string
          */
-        public function getUnSerializeFunction()
+        public function unserialize($data)
         {
-            if ($this->serializer == 'json_encode') {
-                return 'json_decode';
+            if ($this->serializer == 'json') {
+                try {
+                    return Json::decode($data);
+                } catch (\Exception $e) {
+                    return $data;
+                }
             }
 
-            return 'unserialize';
+            return $this->unserialize($data);
         }
     }
