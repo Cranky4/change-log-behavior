@@ -76,6 +76,14 @@ You can add other targets are to catch logs changes, but *categories*, *logTable
 \Yii::$app->c4ChangeLog->addLog($model, $someText);
 ```
 
+5- OPTIONAL: You may use `json_encode` instead `serialize`:
+```php
+    'c4ChangeLog' => [
+        'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
+        'serializer' => 'json_encode'
+    ],
+```
+
 ### Example
 App config *config/main.php*
 ```php
