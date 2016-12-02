@@ -79,7 +79,7 @@
          */
         public function getSerializeFunction()
         {
-            if (in_array('serialize', 'json_encode')) {
+            if (in_array($this->serializer, ['serialize', 'json_encode'])) {
                 return $this->serializer;
             }
 
