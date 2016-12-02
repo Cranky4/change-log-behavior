@@ -26,6 +26,11 @@
         public $showLimit = 20;
 
         /**
+         * @var string
+         */
+        public $serializer = 'serialize';
+
+        /**
          * @param \yii\base\Model $model
          *
          * @return string
@@ -67,5 +72,29 @@
                     ->all(),
                 'pagination' => false,
             ]);
+        }
+
+        /**
+         * @return string
+         */
+        public function getSerializeFunction()
+        {
+            if (in_array('serialize', 'json_encode')) {
+                return $this->serializer;
+            }
+
+            return 'serialize';
+        }
+
+        /**
+         * @return string
+         */
+        public function getUnSerializeFunction()
+        {
+            if ($this->serializer == 'json_encode') {
+                return 'json_decode';
+            }
+
+            return 'unserialize';
         }
     }

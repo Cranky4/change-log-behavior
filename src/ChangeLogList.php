@@ -58,6 +58,11 @@
              * @var ChangeLogBehavior $model
              */
             $logProvider = $model->getLog();
+            /**
+             * @var ChangeLog $component
+             */
+            $component = \Yii::$app->c4ChangeLog;
+            $function = $component->getUnSerializeFunction();
 
             $view = $this->header;
             $view .= GridView::widget([
@@ -67,8 +72,8 @@
                     'prefix',
                     [
                         'attribute' => 'message',
-                        'content'   => function ($item) {
-                            $messages = unserialize($item['message']);
+                        'content'   => function ($item) use ($function) {
+                            $messages = $function($item['message']);
                             if (is_array($messages)) {
                                 $message = "";
                                 foreach ($messages as $attr => $changes) {

@@ -35,6 +35,10 @@
              */
             $owner = $this->owner;
             $changedAttributes = $event->changedAttributes;
+            /**
+             * @var ChangeLog $component
+             */
+            $component = \Yii::$app->c4ChangeLog;
 
             $diff = [];
             foreach ($changedAttributes as $attrName => $attrVal) {
@@ -51,10 +55,12 @@
             }
             $diff = $this->_applyExclude($diff);
 
+            $function = $component->getSerializeFunction();
+
             if ($diff) {
                 $diff = $this->_setLabels($diff);
 
-                \Yii::$app->c4ChangeLog->addLog($owner, serialize($diff));
+                $component->addLog($owner, $function($diff));
             }
         }
 
