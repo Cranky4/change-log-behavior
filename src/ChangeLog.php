@@ -13,7 +13,6 @@
     use yii\data\ArrayDataProvider;
     use yii\db\ActiveRecord;
     use yii\db\Query;
-    use yii\helpers\ArrayHelper;
     use yii\helpers\Json;
 
     /**
@@ -93,14 +92,14 @@
          */
         public function unserialize($data)
         {
-            if ($this->serializer == 'json') {
-                try {
+            try {
+                if ($this->serializer == 'json') {
                     return Json::decode($data);
-                } catch (\Exception $e) {
-                    return $data;
                 }
-            }
 
-            return $this->unserialize($data);
+                return unserialize($data);
+            } catch (\Exception $e) {
+                return $data;
+            }
         }
     }
