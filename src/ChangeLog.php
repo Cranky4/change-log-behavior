@@ -54,6 +54,9 @@
          */
         public function addLog(ActiveRecord $model, $message)
         {
+            if(is_array($message)) {
+                $message = $this->serialize($message);
+            }
             \Yii::info($message, $this->getCategory($model));
         }
 
@@ -103,3 +106,4 @@
             }
         }
     }
+
