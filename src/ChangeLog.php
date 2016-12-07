@@ -30,6 +30,10 @@
          * @var string
          */
         public $serializer = 'serialize';
+        /**
+         * @var string
+         */
+        public $logCategory = 'changelog';
 
         /**
          * @param \yii\base\Model $model
@@ -40,16 +44,16 @@
         {
             if (!$model->isNewRecord) {
                 $id = $model->id;
-                $category = self::className().':'.$model->formName().'-'.$id;
+                $category = $this->logCategory.":".$model->formName().'-'.$id;
             } else {
-                $category = self::className().':'.$model->formName();
+                $category = $this->logCategory.":".$model->formName();
             }
 
             return $category;
         }
 
         /**
-         * @param \yii\db\ActiveRecord $model
+         * @param ActiveRecord $model
          * @param string $message
          */
         public function addLog(ActiveRecord $model, $message)
@@ -63,7 +67,7 @@
         /**
          * @param $model
          *
-         * @return \yii\data\ArrayDataProvider
+         * @return ArrayDataProvider
          */
         public function getLog(ActiveRecord $model)
         {
@@ -106,4 +110,5 @@
             }
         }
     }
+
 

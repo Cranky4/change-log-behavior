@@ -50,7 +50,7 @@
                     if ($newAttrVal == '') {
                         $newAttrVal = 'null';
                     }
-                    $diff[$attrName] = $attrVal." &raquo; ".$newAttrVal;
+                    $diff[$attrName] = [$attrVal, $newAttrVal];
                 }
             }
             $diff = $this->_applyExclude($diff);

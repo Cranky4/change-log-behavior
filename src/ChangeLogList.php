@@ -77,6 +77,9 @@
                             if (is_array($messages)) {
                                 $message = "";
                                 foreach ($messages as $attr => $changes) {
+                                    if(is_array($changes) && count($changes) == 2) {
+                                        $changes = $changes[0]. " &raquo; " . $changes[1];
+                                    }
                                     $message .= $attr.": ".$changes."<br>";
                                 }
 
