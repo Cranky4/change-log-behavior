@@ -5,27 +5,28 @@ use yii\db\Migration;
 class m160716_173208_changelogs extends Migration
 {
     // Use safeUp/safeDown to run migration code within a transaction
+    private $table = '{{%changelogs}}';
+
     public function safeUp()
     {
-        $this->execute("
-            CREATE TABLE `changelogs` (
-              `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-              `relatedObjectType` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-              `relatedObjectId` int(11) unsigned DEFAULT NULL,
-              `data` text COLLATE utf8mb4_unicode_ci,
-              `createdAt` int(11) unsigned DEFAULT NULL,
-              `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-              `descr` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-              `userId` int(11) DEFAULT NULL,
-              `hostname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-              PRIMARY KEY (`id`),
-              KEY `relatedObjectName` (`relatedObjectType`,`relatedObjectId`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=738 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ");
+        $this->createTable($this->table, [
+            'id' => $this->primaryKey()->unsigned(),
+            'relatedObjectType' => $this->string(191)->notNull(),
+            'relatedObjectId' => $this->integer()->notNull(),
+            'data' => $this->text(),
+            'createdAt' => $this->integer(),
+            'type' => $this->string(191)->null(),
+            'userId' => $this->integer(),
+            'hostname' => $this->string(191)
+        ], 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+
+        $this->createIndex('IN_related_object_type', $this->table, 'relatedObjectType');
+        $this->createIndex('IN_related_object_id', $this->table, 'relatedObjectId');
+        $this->createIndex('IN_type', $this->table, 'type');
     }
 
     public function safeDown()
     {
-        $this->dropTable('{{%changelogs}}');
+        $this->dropTable($this->table);
     }
 }
