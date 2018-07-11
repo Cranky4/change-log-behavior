@@ -15,7 +15,6 @@ use yii\db\ActiveRecord;
  * @property string $data
  * @property string $createdAt
  * @property string $type
- * @property string $descr
  * @property integer $userId
  * @property \yii\db\ActiveQuery $user
  * @property string $hostname
@@ -66,7 +65,6 @@ class LogItem extends ActiveRecord
             //[['data'], 'string'],
             [['createdAt', 'relatedObject', 'data'], 'safe'],
             [['relatedObjectType', 'type', 'hostname'], 'string', 'max' => 255],
-            [['descr'], 'string', 'max' => 10000],
         ];
     }
 
@@ -82,7 +80,6 @@ class LogItem extends ActiveRecord
             'data' => 'Data',
             'createdAt' => 'Created At',
             'type' => 'Type',
-            'descr' => 'Descr',
             'userId' => 'User ID',
             'hostname' => 'Hostname',
         ];

@@ -122,7 +122,7 @@ class ChangeLogBehavior extends Behavior
      *
      * @return array
      */
-    private function setLabels(array $diff)
+    public function setChangelogLabels(array $diff)
     {
         return $diff;
     }
