@@ -8,7 +8,7 @@ class m160716_173208_changelogs extends Migration
     public function safeUp()
     {
         $this->execute("
-            CREATE TABLE `{{%changelogs}}` (
+            CREATE TABLE `changelogs` (
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `relatedObjectType` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
               `relatedObjectId` int(11) unsigned DEFAULT NULL,
