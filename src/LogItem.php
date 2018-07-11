@@ -1,8 +1,8 @@
 <?php
 
-namespace common\modules\eventLogger\models;
+namespace cranky4\changeLogBehavior;
 
-use common\helpers\CompositeRelationHelper;
+use cranky4\changeLogBehavior\helpers\CompositeRelationHelper;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

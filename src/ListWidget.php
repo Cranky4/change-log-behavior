@@ -5,10 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace common\modules\eventLogger\widgets\objectLog;
+namespace cranky4\changeLogBehavior;
 
-use common\helpers\CompositeRelationHelper;
-use common\modules\eventLogger\models\LogItem;
+use cranky4\changeLogBehavior\helpers\CompositeRelationHelper;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
@@ -35,6 +34,7 @@ class ListWidget extends Widget
      * @param $objectType
      * @param $objectId
      * @return ActiveDataProvider
+     * @throws \ReflectionException
      */
     public function getEventProvider($objectType, $objectId)
     {

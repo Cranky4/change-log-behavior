@@ -1,8 +1,7 @@
 <?php
 
-namespace common\modules\eventLogger\behaviors;
+namespace cranky4\changeLogBehavior;
 
-use common\modules\eventLogger\models\LogItem;
 use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;

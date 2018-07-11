@@ -6,9 +6,9 @@
  * Time: 13:25
  */
 
-namespace common\modules\eventLogger\components;
+namespace cranky4\changeLogBehavior\traits;
 
-use common\modules\eventLogger\models\LogItem;
+use cranky4\changeLogBehavior\LogItem;
 
 /**
  * If you want to use change log with ActiveRecord::updateAttributes()
