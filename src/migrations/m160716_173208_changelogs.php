@@ -1,32 +1,31 @@
 <?php
 
-    use yii\db\Migration;
+use yii\db\Migration;
 
-    class m160716_173208_changelogs extends Migration
+class m160716_173208_changelogs extends Migration
+{
+    // Use safeUp/safeDown to run migration code within a transaction
+    public function safeUp()
     {
-        // Use safeUp/safeDown to run migration code within a transaction
-        public function safeUp()
-        {
-            $tableOptions = null;
-            if ($this->db->driverName === 'mysql') {
-                // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-                $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-            }
-            $this->createTable('{{%changelogs}}', [
-                'id'       => $this->primaryKey(),
-                'level'    => $this->integer(11)->null(),
-                'category' => $this->string(255)->null(),
-                'log_time' => $this->integer(11)->null(),
-                'prefix'   => $this->text()->null(),
-                'message'  => $this->text()->null(),
-            ], $tableOptions);
-
-            $this->createIndex('idx_log_level', '{{%changelogs}}', ['level']);
-            $this->createIndex('idx_log_category', '{{%changelogs}}', ['category']);
-        }
-
-        public function safeDown()
-        {
-            $this->dropTable('{{%changelogs}}');
-        }
+        $this->execute("
+            CREATE TABLE `{{%changelogs}}` (
+              `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+              `relatedObjectType` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+              `relatedObjectId` int(11) unsigned DEFAULT NULL,
+              `data` text COLLATE utf8mb4_unicode_ci,
+              `createdAt` int(11) unsigned DEFAULT NULL,
+              `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+              `descr` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+              `userId` int(11) DEFAULT NULL,
+              `hostname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+              PRIMARY KEY (`id`),
+              KEY `relatedObjectName` (`relatedObjectType`,`relatedObjectId`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=738 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+        ");
     }
+
+    public function safeDown()
+    {
+        $this->dropTable('{{%changelogs}}');
+    }
+}

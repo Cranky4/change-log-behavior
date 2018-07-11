@@ -13,8 +13,7 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "*",
-    "cranky4/change-log-behavior": "*"
+    "yiisoft/yii2": "~2.0.15.1"
   },
   "require-dev": {},
   "autoload": {

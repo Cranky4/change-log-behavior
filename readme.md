@@ -8,13 +8,7 @@ Simple behavior for your yii2-models
 ```
 composer require cranky4/change-log-behavior "*"
 ```
-2- Add ChangeLog component to your project config file:
-```php
-'c4ChangeLog' => [
-    'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
-],
-```
-3- Run migrations:
+2- Run migrations:
 ```
 yii migrate --migrationPath=@vendor/cranky4/change-log-behavior/src/migrations
 ```
@@ -39,77 +33,19 @@ __Attention:__ Behavior watches to "safe" attributes only.
 Add attributes into *excludedAttributes* if you don't want to log 
 its changes.
 
-2- Configure *log* component:
-```php
-    'components' => [
-        ...
-        'log'         => [
-            'targets'    => [
-                // add new target
-                [
-                    'class'      => 'yii\log\DbTarget',
-                    'categories' => ['cranky4\ChangeLogBehavior\ChangeLog:*'],
-                    'logTable'   => '{{%changelogs}}',
-                    //remove application category from logging
-                    'logVars'    => [],
-                    'levels'     => ['info'],
-                ],
-            ],
-        ],
-        ...
-    ],
-```
-You can add other targets are to catch logs changes, but *categories*, *logTable* and *level* must be same as in the code above.
-
-3- Add *ChangeLogList* to view:
+2- Add *ChangeLogList* to view:
 ```php
  echo ChangeLogList::widget([
      'model' => $model,
  ])
 ```
 
-4- Add custom log:
+3- Add custom log:
 ```php
-// Use serialize() if you want to add array. Use pairs [attrName => message, attrName2 => message]:
-\Yii::$app->c4ChangeLog->addLog($model, serialize($array));
-// If you want to add text to log use: 
-\Yii::$app->c4ChangeLog->addLog($model, $someText);
-```
-
-5- OPTIONAL: You may use `json_encode` instead `serialize`:
-```php
-    'c4ChangeLog' => [
-        'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
-        'serializer' => 'json'
-    ],
+$model->addCustomLog('hello world!', 'hello_type')
 ```
 
 ### Example
-App config *config/main.php*
-```php
-return [
-    ...
-    
-    'components' => [
-        ...
-        'log'         => [
-            [
-                'class'      => 'yii\log\DbTarget',
-                'categories' => ['cranky4\ChangeLogBehavior\ChangeLog:*'],
-                'logTable'   => '{{%changelogs}}',
-                //remove application category from logging
-                'logVars'    => [],
-                'levels'     => ['info'],
-            ],
-        ],
-        'c4ChangeLog' => [
-            'class' => 'cranky4\ChangeLogBehavior\ChangeLog',
-        ],
-        ...
-    ],
-    ...
-];
-```
 
 Model *Post*
 ```php
@@ -129,7 +65,7 @@ class Post extends yii\db\ActiveRecord {
     {
         return [
             [
-                'class' => ChangeLogBehavior::className(),
+                'class' => ChangeLogBehavior::class,
                 'excludedAttributes' => ['created_at','updated_at'],
             ]
         ];
@@ -139,7 +75,7 @@ class Post extends yii\db\ActiveRecord {
 ```
 View *post/view.php*
 ```php
-use cranky4\ChangeLogBahavior\ChangeLogList;
+use cranky4\ChangeLogBahavior\ListWidget;
 use app\models\Post;
 
 /**
