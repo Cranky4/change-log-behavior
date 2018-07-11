@@ -14,7 +14,7 @@ use yii\helpers\StringHelper;
  *
  * @property array $labels
  */
-class ChangeLogBegavior extends Behavior
+class ChangeLogBehavior extends Behavior
 {
     /**
      * @var array
