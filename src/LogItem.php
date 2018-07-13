@@ -4,6 +4,7 @@ namespace cranky4\changeLogBehavior;
 
 use cranky4\changeLogBehavior\helpers\CompositeRelationHelper;
 use yii\behaviors\TimestampBehavior;
+use yii\console\Application;
 use yii\db\ActiveRecord;
 
 /**
@@ -93,12 +94,8 @@ class LogItem extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if (empty($this->userId)) {
-            if (!\Yii::$app->user->isGuest) {
-                $this->userId = \Yii::$app->user->id;
-            } else {
-                $this->userId = 0;
-            }
+        if (empty($this->userId) && !(\Yii::$app instanceof Application) && !\Yii::$app->user->isGuest) {
+            $this->userId = \Yii::$app->user->id;
         }
 
         if (empty($this->hostname) && \Yii::$app->request->hasMethod('getUserIP')) {
