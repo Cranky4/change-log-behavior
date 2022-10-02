@@ -35,6 +35,7 @@ its changes.
 
 2- Add *ChangeLogList* to view:
 ```php
+ use cranky4\changeLogBehavior\ListWidget as ChangeLogList;
  echo ChangeLogList::widget([
      'model' => $model,
  ])
@@ -75,7 +76,9 @@ class Post extends yii\db\ActiveRecord {
 ```
 View *post/view.php*
 ```php
-use cranky4\ChangeLogBahavior\ListWidget as ChangeLogList;
+use cranky4\changeLogBahavior\ListWidget as ChangeLogList;
+
+
 use app\models\Post;
 
 /**
