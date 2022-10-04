@@ -87,14 +87,11 @@ class ChangeLogBehavior extends Behavior
         if (!is_array($data)) {
             $data = [$data];
         }
-        if ($type) {
-            $this->setType($type);
-        }
 
         $logEvent = new LogItem();
         $logEvent->relatedObject = $this->owner;
         $logEvent->data = $data;
-        $logEvent->type = $this->type;
+        $logEvent->type = $type;
         $logEvent->save();
     }
 
