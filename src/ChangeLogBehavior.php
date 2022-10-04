@@ -2,6 +2,7 @@
 
 namespace cranky4\changeLogBehavior;
 
+use Yii;
 use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;
@@ -70,7 +71,7 @@ class ChangeLogBehavior extends Behavior
 
         if ($diff) {
             $diff = $this->owner->setChangelogLabels($diff);
-            $logEvent = new LogItem();
+            $logEvent = $this->getLogItem();
             $logEvent->relatedObject = $owner;
             $logEvent->data = $diff;
             $logEvent->type = $this->type;
@@ -88,7 +89,7 @@ class ChangeLogBehavior extends Behavior
             $data = [$data];
         }
 
-        $logEvent = new LogItem();
+        $logEvent = $this->getLogItem();
         $logEvent->relatedObject = $this->owner;
         $logEvent->data = $data;
         $logEvent->type = $type;
@@ -126,10 +127,18 @@ class ChangeLogBehavior extends Behavior
 
     public function addDeleteLog()
     {
-        $logEvent = new LogItem();
+        $logEvent = $this->getLogItem();
         $logEvent->relatedObject = $this->owner;
         $logEvent->data = '';
         $logEvent->type = self::DELETED;
         $logEvent->save();
+    }
+
+    /**
+     * @return LogItem
+     */
+    protected function getLogItem()
+    {
+        return Yii::$container->get('cranky4\changeLogBehavior\LogItem');
     }
 }
